@@ -40,12 +40,6 @@ def parse_args():
         help="Number of days to search for satellite passes (default: 10)"
     )
     parser.add_argument(
-        "--calc_resolution_min",
-        type=int,
-        default=10,
-        help="Number of minutes between calculations (default: 10)"
-    )
-    parser.add_argument(
         "--elevation_m",
         type=int,
         default=200,
@@ -73,7 +67,7 @@ async def main():
         satellite_name=args.satellite_name,
         lat=float(args.lat),
         lon=float(args.lon),
-        calc_resolution_min=int(args.calc_resolution_min),
+        calc_resolution_min=1,
         timezone_param=args.timezone,
         elev=int(args.elevation_m),
         min_above_horizon_deg=int(args.min_above_horizon_deg),
