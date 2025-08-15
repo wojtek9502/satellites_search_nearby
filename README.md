@@ -34,9 +34,9 @@ pip install -r requirements.txt
 ### Run
 ```shell
 # Set satellite name and your locations
-# usage: run.py [-h] --lat LAT --lon LON [--satellite_name SATELLITE_NAME] [--range_days RANGE_DAYS] [--calc_resolution_min CALC_RESOLUTION_MIN] [--elevation_m ELEVATION_M] [--min_above_horizon_deg MIN_ABOVE_HORIZON_DEG] [--timezone TIMEZONE]
+# usage: run.py [-h] --lat LAT --lon LON [--satellite_name SATELLITE_NAME] [--range_days RANGE_DAYS]  [--elevation_m ELEVATION_M] [--min_above_horizon_deg MIN_ABOVE_HORIZON_DEG] [--timezone TIMEZONE]
 
 python run.py --satellite_name 'ISS (ZARYA)' --lat '50.06143' --lon '19.93658'
-python run.py --satellite_name 'ISS (ZARYA)' --lat '50.06143' --lon '19.93658' --range_days 5 --timezone 'Europe/Warsaw' --calc_resolution_min 1
+python run.py --satellite_name 'ISS (ZARYA)' --lat '50.06143' --lon '19.93658' --range_days 5 --timezone 'Europe/Warsaw'
 ```
 

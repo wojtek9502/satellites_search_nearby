@@ -67,19 +67,6 @@ class SatelliteSearch:
             created_on = created_on_utc
         )
 
-        if self.timezone != "UTC":
-            dt_utc = datetime.fromisoformat(created_on_utc.replace("Z", "+00:00"))
-            # Convert to local timezone
-            timezone_str = self.timezone
-            dt_local = dt_utc.astimezone(ZoneInfo(timezone_str))
-            tle_data = TleRecord(
-                id=id_,
-                satellite_name=sat_name,
-                tle_line1=line1,
-                tle_line2=line2,
-                created_on=dt_local
-            )
-
         return tle_data
 
     async def _get_satellite_object(self, satellite_name: str) -> EarthSatellite:
@@ -109,8 +96,14 @@ class SatelliteSearch:
             alt, az, distance = topocentric.altaz()
 
             # satellite above the horizon by 20 degrees and it is night
+            calculated_dt = dt_now
+            if self.timezone != "UTC":
+                # Convert to local timezone
+                timezone_str = self.timezone
+                calculated_dt = calculated_dt.astimezone(ZoneInfo(timezone_str))
+
             if alt.degrees > self.min_above_horizon_deg and self._is_passed_during_night(dt_now):
-                single_pass_text = f"{dt_now} | altitude: {alt.degrees:.1f}°, azimuth: {az.degrees:.1f}°"
+                single_pass_text = f"{calculated_dt} | altitude: {alt.degrees:.1f}°, azimuth: {az.degrees:.1f}°"
                 single_passes_texts.append(single_pass_text)
 
             dt_now += step

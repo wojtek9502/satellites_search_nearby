@@ -48,8 +48,8 @@ def parse_args():
     parser.add_argument(
         "--min_above_horizon_deg",
         type=int,
-        default=20,
-        help="Minimum satellite altitude above horizon in degrees (default: 20)"
+        default=5,
+        help="Minimum satellite altitude above horizon in degrees (default: 5)"
     )
     parser.add_argument(
         "--timezone",
