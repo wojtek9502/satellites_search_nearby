@@ -4,8 +4,10 @@
 - Python 3.11+
 
 ### Details
+Details
 This script allows you to calculate the passes of selected satellites and space objects based on the provided coordinates.  
-Data is calculated for X consecutive days with a one-minute resolution.  
+Data is calculated for X consecutive days with a one-minute resolution. The script uses TLE files downloaded from the internet.  
+To avoid overloading the TLE server, TLE data is stored in an SQLite database and updated only if the latest data in the database is older than 2 hours.  
 
 Available objects  
 - ISS (ZARYA)  
