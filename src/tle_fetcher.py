@@ -4,7 +4,7 @@ from pathlib import Path
 import aiohttp
 import aiofiles
 
-from src import TEMP_FILES_DIR, tle_database
+from src import TEMP_FILES_DIR, TLE_DATABASE_PATH
 from src.database import TleDatabase
 
 
@@ -15,9 +15,11 @@ class TLEFetcherLimiter:
         if record's created_on is older than 2h we download the new TLE file
     """
 
-    @staticmethod
-    def is_tle_fetch_allowed(db: TleDatabase) -> bool:
-        latest_tle_db_record = db.get_latest_tle_record()
+    def __init__(self, db):
+        self.tle_database = db
+
+    def is_tle_fetch_allowed(self) -> bool:
+        latest_tle_db_record = self.tle_database.get_latest_tle_record()
         if latest_tle_db_record is None:
             return True
 
@@ -27,6 +29,9 @@ class TLEFetcherLimiter:
         return diff > timedelta(hours=2)
 
 class TLEFetcher:
+    def __init__(self):
+        self.tle_database = TleDatabase(db_path=str(TLE_DATABASE_PATH))
+
     @staticmethod
     async def _write_tle_file_locally(file_path: str, tle_file_content: str):
         async with aiofiles.open(file_path, "w") as out:
@@ -39,13 +44,12 @@ class TLEFetcher:
             resp.raise_for_status()
             return await resp.text()
 
-    @classmethod
-    async def get_latest_tle_data(cls, tle_url: str):
-        if not TLEFetcherLimiter.is_tle_fetch_allowed(db=tle_database):
+    async def get_latest_tle_data(self, tle_url: str):
+        if not TLEFetcherLimiter(self.tle_database).is_tle_fetch_allowed():
             return "You have the latest TLE record"
 
         async with aiohttp.ClientSession() as session:
-            tle_text = await cls._fetch_tle_file_content(session, tle_url)
+            tle_text = await self._fetch_tle_file_content(session, tle_url)
 
             # save in db
             lines = tle_text.strip().splitlines()
@@ -53,10 +57,10 @@ class TLEFetcher:
                 satellite_name = lines[i].strip()
                 l1 = lines[i + 1].strip()
                 l2 = lines[i + 2].strip()
-                tle_database.insert_tle(satellite_name, l1, l2)
+                self.tle_database.insert_tle(satellite_name, l1, l2)
 
             local_tle_path = str(Path(TEMP_FILES_DIR, 'latest_tle.txt'))
-            await cls._write_tle_file_locally(
+            await self._write_tle_file_locally(
                 file_path=local_tle_path,
                 tle_file_content=tle_text
             )
