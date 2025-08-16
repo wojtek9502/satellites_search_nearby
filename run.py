@@ -18,13 +18,13 @@ def parse_args():
         "--lat",
         type=str,
         required=True,
-        help="Latitude of the observer (e.g., '50.0647N')"
+        help="Latitude of the observer (e.g., '50.0647')"
     )
     parser.add_argument(
         "--lon",
         type=str,
         required=True,
-        help="Longitude of the observer (e.g., '19.9450E')"
+        help="Longitude of the observer (e.g., '19.9450')"
     )
     parser.add_argument(
         "--satellite_name",
