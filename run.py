@@ -46,10 +46,10 @@ def parse_args():
         help="Observer's elevation in meters (default: 200)"
     )
     parser.add_argument(
-        "--min_above_horizon_deg",
-        type=int,
-        default=5,
-        help="Minimum satellite altitude above horizon in degrees (default: 5)"
+        "--min_culmination_altitude_deg",
+        type=float,
+        default=15.0,
+        help="Minimum satellite altitude above horizon in culmination, in degrees (default: 15)"
     )
     parser.add_argument(
         "--timezone",
@@ -67,10 +67,9 @@ async def main():
         satellite_name=args.satellite_name,
         lat=float(args.lat),
         lon=float(args.lon),
-        calc_resolution_min=1,
         timezone_param=args.timezone,
         elev=int(args.elevation_m),
-        min_above_horizon_deg=int(args.min_above_horizon_deg),
+        min_culmination_altitude_deg=int(args.min_culmination_altitude_deg),
         range_days=int(args.range_days)
     )
 
