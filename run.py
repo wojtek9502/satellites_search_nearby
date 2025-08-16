@@ -2,6 +2,7 @@ import asyncio
 import argparse
 
 import dotenv
+from skyfield.api import load
 
 from src.satellite_search import SatelliteSearch
 
@@ -61,6 +62,9 @@ def parse_args():
     return parser.parse_args()
 
 async def main():
+    print('Load planets file...')
+    load('de421.bsp')
+
     args = parse_args()
     satellite_search = SatelliteSearch(
         tle_url=TLE_URL,
