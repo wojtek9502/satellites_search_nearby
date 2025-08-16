@@ -73,7 +73,7 @@ async def main():
         range_days=int(args.range_days)
     )
 
-    print("Calculating satellite passes...")
+    print("Calculating the satellite passes...")
     passes_text = await satellite_search.calculate_satellites_nearby()
     print(passes_text)
 

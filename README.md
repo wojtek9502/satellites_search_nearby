@@ -44,7 +44,7 @@ python run.py --satellite_name 'ISS (ZARYA)' --lat '50.06143' --lon '19.93658' -
 
 ### Output
 ```shell
-Calculating satellite passes...
+Calculating the satellite passes...
 Passes of satellite 'ISS (ZARYA)' over location (50.06143, 19.93658) during the next 10 days.
 
 | Satellite   | Start (Europe/Warsaw)            | Altitude   | Azimuth   | Culmination (Europe/Warsaw)      | Altitude   | Azimuth   | End (Europe/Warsaw)              | Altitude   | Azimuth   |
