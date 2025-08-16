@@ -10,9 +10,9 @@ from src.database import TleDatabase
 
 class TLEFetcherLimiter:
     """
-        TLE page has timeout, we can download TLE files only few times per 2 hours
+        The TLE pages have limits; we can download TLE files only a few times per 2 hours.
         Here we will check the database and search the latest TLE record
-        if record's created_on is older than 2h we download the new TLE file
+        If the record's created_on is older than 2h, we will download the new TLE file.
     """
 
     def __init__(self, db):
