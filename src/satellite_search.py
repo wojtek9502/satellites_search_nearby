@@ -78,7 +78,9 @@ class SatelliteSearch:
 
     def _to_local_time(self, t):
         dt = t.utc_datetime()
-        return dt if self.timezone == "UTC" else dt.astimezone(ZoneInfo(self.timezone))
+        if self.timezone != "UTC":
+            dt = dt.astimezone(ZoneInfo(self.timezone))
+        return dt.strftime("%Y-%m-%d %H:%M:%S %z")[:-2] + ":" + dt.strftime("%z")[-2:]
 
     def _alt_az_calc(self, satellite, observer, t):
         alt, az, _ = (satellite - observer).at(t).altaz()
@@ -175,5 +177,5 @@ class SatelliteSearch:
             table_data.append(next_pass.values())
 
         passes_table_text =  str(tabulate(table_data, headers=table_header, tablefmt='github'))
-        satellites_passes_text += '\n\n' + passes_table_text
+        satellites_passes_text += '\n\n' + passes_table_text + '\n'
         return satellites_passes_text
