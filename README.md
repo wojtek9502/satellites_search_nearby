@@ -35,15 +35,15 @@ pip install -r requirements.txt
 ### Run
 ```shell
 # usage: run.py [-h] --lat LAT --lon LON [--satellite_name SATELLITE_NAME] [--range_days RANGE_DAYS] [--elevation_m ELEVATION_M] [--min_culmination_altitude_deg MIN_CULMINATION_ALTITUDE_DEG] [--timezone TIMEZONE]
-python run.py --satellite_name 'ISS (ZARYA)' --lat '50.06143' --lon '19.93658'
-python run.py --satellite_name 'ISS (ZARYA)' --lat '50.06143' --lon '19.93658' --range_days 5 --timezone 'Europe/Warsaw'
-python run.py --satellite_name 'ISS (ZARYA)' --lat '50.06143' --lon '19.93658' --range_days 5 --timezone 'UTC' --min_culmination_altitude_deg 10.0
+python run.py --satellite_name "ISS (ZARYA)" --lat "50.06143" --lon "19.93658"
+python run.py --satellite_name "ISS (ZARYA)" --lat "50.06143" --lon "19.93658" --range_days 5 --timezone "Europe/Warsaw"
+python run.py --satellite_name "ISS (ZARYA)" --lat "50.06143" --lon "19.93658" --range_days 5 --timezone "UTC" --min_culmination_altitude_deg 10.0
 ```
 
 ### Output
 ```shell
 Calculating the satellite passes...
-Passes of satellite 'ISS (ZARYA)' over location (50.06143, 19.93658) during the next 10 days.
+Passes of satellite "ISS (ZARYA)" over location (50.06143, 19.93658) during the next 10 days.
 
 | Satellite   | Start (Europe/Warsaw)      | Altitude   | Azimuth   | Culmination (Europe/Warsaw)   | Altitude   | Azimuth   | End (Europe/Warsaw)        | Altitude   | Azimuth   |
 |-------------|----------------------------|------------|-----------|-------------------------------|------------|-----------|----------------------------|------------|-----------|
