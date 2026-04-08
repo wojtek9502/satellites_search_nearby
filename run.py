@@ -37,8 +37,8 @@ def parse_args():
     parser.add_argument(
         "--range_days",
         type=int,
-        default=10,
-        help="Number of days to search for satellite passes (default: 10)"
+        default=31,
+        help="Number of days to search for satellite passes (default: 31)"
     )
     parser.add_argument(
         "--elevation_m",
