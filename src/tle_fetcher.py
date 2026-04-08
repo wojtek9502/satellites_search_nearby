@@ -46,7 +46,8 @@ class TLEFetcher:
 
     async def get_latest_tle_data(self, tle_url: str):
         if not TLEFetcherLimiter(self.tle_database).is_tle_fetch_allowed():
-            return "You have the latest TLE record"
+            print("You have the latest TLE record")
+            return
 
         async with aiohttp.ClientSession() as session:
             tle_text = await self._fetch_tle_file_content(session, tle_url)
@@ -65,4 +66,5 @@ class TLEFetcher:
                 tle_file_content=tle_text
             )
 
-        return "Latest TLE record downloaded and saved in the db"
+        print("Latest TLE record downloaded and saved in the db")
+        return
